@@ -189,12 +189,10 @@
   __tmp; })
 
 #define write_csr(reg, val) ({ \
+  if (__builtin_constant_p(val) && (unsigned long)(val) < 32) \
+    asm volatile ("csrw " #reg ", %0" :: "i"(val)); \
+  else \
     asm volatile ("csrw " #reg ", %0" :: "r"(val)); })
-
-  // if (__builtin_constant_p(val) && (unsigned long)(val) < 32) \
-  //   asm volatile ("csrw " #reg ", %0" :: "i"(val)); \
-  // else \
-  // 
 
 #define swap_csr(reg, val) ({ unsigned long __tmp; \
   if (__builtin_constant_p(val) && (unsigned long)(val) < 32) \

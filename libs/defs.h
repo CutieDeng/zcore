@@ -10,7 +10,8 @@
 #define __noreturn __attribute__((noreturn))
 
 /* Represents true-or-false values */
-typedef int bool;
+// TODO: should you do it? 
+// typedef int bool;
 
 /* Explicitly-sized versions of integer types */
 typedef char int8_t;
