@@ -14,7 +14,7 @@ pub fn build(b: *std.Build) void {
     // what target to build for. Here we do not override the defaults, which
     // means any target is allowed, and the default is native. Other options
     // for restricting supported target set are available.
-    const target = b.standardTargetOptions(.{});
+    // const target = b.standardTargetOptions(.{});
 
     // Standard optimization options allow the person running `zig build` to select
     // between Debug, ReleaseSafe, ReleaseFast, and ReleaseSmall. Here we do not
@@ -26,7 +26,9 @@ pub fn build(b: *std.Build) void {
         // In this case the main source file is merely a path, however, in more
         // complicated build scripts, this could be a generated file.
         // .root_source_file = .{ .path = "src/main.zig" },
-        .target = target,
+        .target = std.zig.CrossTarget {
+            .cpu_arch = .riscv64,   
+        }, 
         .optimize = optimize,
     });
     exe.code_model = .medium; 
